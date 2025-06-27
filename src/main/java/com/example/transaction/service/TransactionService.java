@@ -3,7 +3,6 @@ package com.example.transaction.service;
 import com.example.transaction.model.Transaction;
 import com.example.transaction.repository.TransactionRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,9 +12,12 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class TransactionService {
     private final TransactionRepository repository;
+
+    public TransactionService(TransactionRepository repository) {
+        this.repository = repository;
+    }
 
     @Transactional
     public Transaction create(Transaction transaction) {

@@ -3,7 +3,6 @@ package com.example.transaction.controller;
 import com.example.transaction.model.Transaction;
 import com.example.transaction.service.TransactionService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +11,13 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/transactions")
-@RequiredArgsConstructor
 public class TransactionController {
 
     private final TransactionService service;
+
+    public TransactionController(TransactionService service) {
+        this.service = service;
+    }
 
     @PostMapping
     public ResponseEntity<Transaction> create(@Valid @RequestBody Transaction transaction) {
